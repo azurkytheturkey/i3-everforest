@@ -11,14 +11,14 @@
 ;; Use pywal.sh in scripts directory to use colors from an image/wallpaper.
 
 ;; main colors
-background = #343F44
-foreground = #D3C6AA
-sep = #4F585E
+background = #2D353B
+foreground = #3D484D
+sep = #3D484DFF
 
 # everforest
 
 white = #D3C6AA
-black = #343F44
+black = #232A2E
 red = #E67E80
 pink = #D699B6
 purple = #D699B6

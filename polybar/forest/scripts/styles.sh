@@ -69,9 +69,9 @@ elif  [[ $1 = "--cherry" ]]; then
 	SE="#4F5D95"
 	change_color
 elif  [[ $1 = "--everforest" ]]; then
-        BG="#343F44"
+        BG="#2D353B"
         FG="#D3C6AA"
-        BGA="#475258"
+        BGA="#343F44"
         SEP="#4F585E"
         AC="#E66868"
         SE="#A7C080"
