@@ -1,0 +1,249 @@
+<domain xmlns:qemu="http://libvirt.org/schemas/domain/qemu/1.0" type="kvm">
+  <name>win10</name>
+  <uuid>abca4911-c992-4b70-b3f0-97b28d00faec</uuid>
+  <metadata>
+    <libosinfo:libosinfo xmlns:libosinfo="http://libosinfo.org/xmlns/libvirt/domain/1.0">
+      <libosinfo:os id="http://microsoft.com/win/10"/>
+    </libosinfo:libosinfo>
+  </metadata>
+  <memory unit="KiB">16777216</memory>
+  <currentMemory unit="KiB">16777216</currentMemory>
+  <vcpu placement="static">8</vcpu>
+  <vcpus>
+    <vcpu id="0" enabled="yes" hotpluggable="no"/>
+    <vcpu id="1" enabled="yes" hotpluggable="no"/>
+    <vcpu id="2" enabled="yes" hotpluggable="no"/>
+    <vcpu id="3" enabled="yes" hotpluggable="no"/>
+    <vcpu id="4" enabled="yes" hotpluggable="no"/>
+    <vcpu id="5" enabled="yes" hotpluggable="no"/>
+    <vcpu id="6" enabled="yes" hotpluggable="no"/>
+    <vcpu id="7" enabled="yes" hotpluggable="no"/>
+  </vcpus>
+  <iothreads>1</iothreads>
+  <cputune>
+    <vcpupin vcpu="0" cpuset="1"/>
+    <vcpupin vcpu="1" cpuset="7"/>
+    <vcpupin vcpu="2" cpuset="2"/>
+    <vcpupin vcpu="3" cpuset="8"/>
+    <vcpupin vcpu="4" cpuset="4"/>
+    <vcpupin vcpu="5" cpuset="10"/>
+    <vcpupin vcpu="6" cpuset="5"/>
+    <vcpupin vcpu="7" cpuset="11"/>
+    <emulatorpin cpuset="0,6"/>
+    <iothreadpin iothread="1" cpuset="0,6"/>
+  </cputune>
+  <sysinfo type="smbios">
+    <bios>
+      <entry name="vendor">American Megatrends Inc.</entry>
+      <entry name="version">5502</entry>
+      <entry name="date">09/20/2021</entry>
+      <entry name="release">5.40</entry>
+    </bios>
+    <system>
+      <entry name="manufacturer">ASUSTeK COMPUTER INC.</entry>
+      <entry name="product">Windows10</entry>
+      <entry name="version">22H2</entry>
+    </system>
+    <baseBoard>
+      <entry name="manufacturer">ASUSTeK COMPUTER INC</entry>
+      <entry name="product">ROG STRIX B450-F GAMING</entry>
+      <entry name="version">Rev X.0x</entry>
+      <entry name="serial">200178892308565</entry>
+    </baseBoard>
+    <chassis>
+      <entry name="manufacturer">Default string</entry>
+      <entry name="version">Default string</entry>
+      <entry name="serial">Default string</entry>
+      <entry name="asset">Default string</entry>
+      <entry name="sku">Default string</entry>
+    </chassis>
+    <oemStrings>
+      <entry>ASUS:ASUSTeK COMPUTER INC</entry>
+      <entry>ASUSTeK COMPUTER INC:asus</entry>
+    </oemStrings>
+  </sysinfo>
+  <os firmware="efi">
+    <type arch="x86_64" machine="pc-q35-8.2">hvm</type>
+    <firmware>
+      <feature enabled="no" name="enrolled-keys"/>
+      <feature enabled="no" name="secure-boot"/>
+    </firmware>
+    <loader readonly="yes" type="pflash">/usr/share/edk2/x64/OVMF_CODE.4m.fd</loader>
+    <nvram template="/usr/share/edk2/x64/OVMF_VARS.4m.fd">/var/lib/libvirt/qemu/nvram/win10_VARS.fd</nvram>
+    <boot dev="hd"/>
+    <smbios mode="sysinfo"/>
+  </os>
+  <features>
+    <acpi/>
+    <apic/>
+    <hyperv mode="custom">
+      <relaxed state="on"/>
+      <vapic state="on"/>
+      <spinlocks state="on" retries="8191"/>
+      <vpindex state="on"/>
+      <runtime state="on"/>
+      <synic state="on"/>
+      <stimer state="on"/>
+      <reset state="on"/>
+      <vendor_id state="on" value="123456789123"/>
+      <frequencies state="on"/>
+      <reenlightenment state="on"/>
+      <tlbflush state="on"/>
+      <ipi state="on"/>
+      <evmcs state="off"/>
+    </hyperv>
+    <kvm>
+      <hidden state="on"/>
+    </kvm>
+    <vmport state="off"/>
+    <smm state="on"/>
+    <ioapic driver="kvm"/>
+  </features>
+  <cpu mode="host-passthrough" check="none" migratable="on">
+    <topology sockets="1" dies="1" clusters="1" cores="4" threads="2"/>
+    <cache mode="passthrough"/>
+    <feature policy="require" name="topoext"/>
+    <feature policy="require" name="hypervisor"/>
+  </cpu>
+  <clock offset="localtime">
+    <timer name="rtc" tickpolicy="catchup"/>
+    <timer name="pit" tickpolicy="delay"/>
+    <timer name="hpet" present="no"/>
+    <timer name="hypervclock" present="yes"/>
+  </clock>
+  <on_poweroff>destroy</on_poweroff>
+  <on_reboot>restart</on_reboot>
+  <on_crash>destroy</on_crash>
+  <pm>
+    <suspend-to-mem enabled="no"/>
+    <suspend-to-disk enabled="no"/>
+  </pm>
+  <devices>
+    <emulator>/usr/local/bin/qemu-system-x86_64</emulator>
+    <disk type="file" device="disk">
+      <driver name="qemu" type="raw" cache="none" io="native"/>
+      <source file="/mnt/win10.img"/>
+      <target dev="sda" bus="sata"/>
+      <address type="drive" controller="0" bus="0" target="0" unit="0"/>
+    </disk>
+    <controller type="usb" index="0" model="qemu-xhci">
+      <address type="pci" domain="0x0000" bus="0x01" slot="0x00" function="0x0"/>
+    </controller>
+    <controller type="sata" index="0">
+      <address type="pci" domain="0x0000" bus="0x00" slot="0x1f" function="0x2"/>
+    </controller>
+    <controller type="pci" index="0" model="pcie-root"/>
+    <controller type="pci" index="1" model="pcie-root-port">
+      <model name="pcie-root-port"/>
+      <target chassis="1" port="0x8"/>
+      <address type="pci" domain="0x0000" bus="0x00" slot="0x01" function="0x0" multifunction="on"/>
+    </controller>
+    <controller type="pci" index="2" model="pcie-root-port">
+      <model name="pcie-root-port"/>
+      <target chassis="2" port="0x9"/>
+      <address type="pci" domain="0x0000" bus="0x00" slot="0x01" function="0x1"/>
+    </controller>
+    <controller type="pci" index="3" model="pcie-root-port">
+      <model name="pcie-root-port"/>
+      <target chassis="3" port="0xa"/>
+      <address type="pci" domain="0x0000" bus="0x00" slot="0x01" function="0x2"/>
+    </controller>
+    <controller type="pci" index="4" model="pcie-root-port">
+      <model name="pcie-root-port"/>
+      <target chassis="4" port="0xb"/>
+      <address type="pci" domain="0x0000" bus="0x00" slot="0x01" function="0x3"/>
+    </controller>
+    <controller type="pci" index="5" model="pcie-root-port">
+      <model name="pcie-root-port"/>
+      <target chassis="5" port="0xc"/>
+      <address type="pci" domain="0x0000" bus="0x00" slot="0x01" function="0x4"/>
+    </controller>
+    <controller type="pci" index="6" model="pcie-to-pci-bridge">
+      <model name="pcie-pci-bridge"/>
+      <address type="pci" domain="0x0000" bus="0x02" slot="0x00" function="0x0"/>
+    </controller>
+    <controller type="pci" index="7" model="pcie-root-port">
+      <model name="pcie-root-port"/>
+      <target chassis="7" port="0xd"/>
+      <address type="pci" domain="0x0000" bus="0x00" slot="0x01" function="0x5"/>
+    </controller>
+    <controller type="virtio-serial" index="0">
+      <address type="pci" domain="0x0000" bus="0x05" slot="0x00" function="0x0"/>
+    </controller>
+    <input type="mouse" bus="ps2"/>
+    <input type="keyboard" bus="ps2"/>
+    <graphics type="spice" autoport="yes">
+      <listen type="address"/>
+      <image compression="off"/>
+      <gl enable="no"/>
+    </graphics>
+    <audio id="1" type="none"/>
+    <video>
+      <model type="none"/>
+    </video>
+    <hostdev mode="subsystem" type="usb" managed="yes">
+      <source>
+        <vendor id="0x1532"/>
+        <product id="0x00b6"/>
+      </source>
+      <address type="usb" bus="0" port="1"/>
+    </hostdev>
+    <hostdev mode="subsystem" type="usb" managed="yes">
+      <source>
+        <vendor id="0x1038"/>
+        <product id="0x1614"/>
+      </source>
+      <address type="usb" bus="0" port="2"/>
+    </hostdev>
+    <hostdev mode="subsystem" type="pci" managed="yes">
+      <source>
+        <address domain="0x0000" bus="0x08" slot="0x00" function="0x0"/>
+      </source>
+      <address type="pci" domain="0x0000" bus="0x03" slot="0x00" function="0x0"/>
+    </hostdev>
+    <hostdev mode="subsystem" type="pci" managed="yes">
+      <source>
+        <address domain="0x0000" bus="0x08" slot="0x00" function="0x1"/>
+      </source>
+      <address type="pci" domain="0x0000" bus="0x04" slot="0x00" function="0x0"/>
+    </hostdev>
+    <hostdev mode="subsystem" type="pci" managed="yes">
+      <source>
+        <address domain="0x0000" bus="0x06" slot="0x00" function="0x0"/>
+      </source>
+      <address type="pci" domain="0x0000" bus="0x07" slot="0x00" function="0x0"/>
+    </hostdev>
+    <redirdev bus="usb" type="spicevmc">
+      <address type="usb" bus="0" port="3"/>
+    </redirdev>
+    <watchdog model="itco" action="reset"/>
+    <memballoon model="none"/>
+    <shmem name="looking-glass">
+      <model type="ivshmem-plain"/>
+      <size unit="M">32</size>
+      <address type="pci" domain="0x0000" bus="0x06" slot="0x01" function="0x0"/>
+    </shmem>
+  </devices>
+  <qemu:commandline>
+    <qemu:arg value="-smbios"/>
+    <qemu:arg value="type=0,version=ASUS:ASUSTeK COMPUTER INC"/>
+    <qemu:arg value="-smbios"/>
+    <qemu:arg value="type=1,manufacturer=ASUS,product=ROG STRIX B450-F GAMING,version=2021.1"/>
+    <qemu:arg value="-smbios"/>
+    <qemu:arg value="type=2,manufacturer=AMD,version=2021.5,product=AMD Ryzen 5 3600"/>
+    <qemu:arg value="-smbios"/>
+    <qemu:arg value="type=3,manufacturer=XBZJ"/>
+    <qemu:arg value="-smbios"/>
+    <qemu:arg value="type=17,manufacturer=CORSAIR,loc_pfx=DDR4,speed=3200,serial=000000,part=0000"/>
+    <qemu:arg value="-smbios"/>
+    <qemu:arg value="type=4,manufacturer=AMD,max-speed=4200,current-speed=4200"/>
+    <qemu:arg value="-cpu"/>
+    <qemu:arg value="host,hv_reenlightenment=on,hv-avic=on,hv_tlbflush=on,hv_ipi=on,hv_evmcs=off,hv_frequencies=on,hv_synic=on,hv_reset=on,hv_time=on,hv_stimer=on,hv_runtime=on,hv_vpindex=on,family=6,model=158,stepping=2,model_id=AMD Ryzen 5 3600 6-Core Processor,vmware-cpuid-freq=false,enforce=false,host-phys-bits=true,topoext=on,hypervisor=on,hv_vendor_id=Microsoft Hv,kvm=on"/>
+    <qemu:arg value="-machine"/>
+    <qemu:arg value="q35,kernel_irqchip=on"/>
+    <qemu:arg value="-device"/>
+    <qemu:arg value="ivshmem-plain,memdev=looking-glass-shm,bus=pcie.0,addr=0x6.0x1"/>
+    <qemu:arg value="-object"/>
+    <qemu:arg value="memory-backend-file,id=looking-glass-shm,share=on,mem-path=/dev/shm/looking-glass,size=32M"/>
+  </qemu:commandline>
+</domain>
