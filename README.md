@@ -1,6 +1,8 @@
 # i3 everforest medium
+2 monitors in config
 
 ![image](https://github.com/user-attachments/assets/1ac6382b-a06d-4b21-abe2-7063239f166f)
+![image](https://github.com/user-attachments/assets/24575165-fd97-40ef-adc0-18da7cf4aba9)
 
 
 MOVE "cachysmall" to home, make sure inside the neofetch is named properly.
