@@ -1,3 +1,5 @@
+# i3 everforest medium
+
 MOVE "cachysmall" to home, make sure inside the neofetch is named properly.
 
 move "alabaster" into https://github.com/alacritty/alacritty-theme /usr/lib/node_modules/alacritty-themes/themes/Alabaster.toml
