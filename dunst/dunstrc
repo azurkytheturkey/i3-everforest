@@ -33,7 +33,7 @@
     origin = top-right
 
     # Offset from the origin
-    offset = 10x50
+    offset = 10x60
 
     # Scale factor. It is auto-detected if value is 0.
     scale = 0
@@ -61,14 +61,14 @@
     progress_bar_max_width = 300
 
     # Corner radius for the progress bar. 0 disables rounded corners.
-    progress_bar_corner_radius = 0
+    progress_bar_corner_radius = 4
 
     # Define which corners to round when drawing the progress bar. If progress_bar_corner_radius
     # is set to 0 this option will be ignored.
     progress_bar_corners = all
 
     # Corner radius for the icon image.
-    icon_corner_radius = 0
+    icon_corner_radius = 4
 
     # Define which corners to round when drawing the icon image. If icon_corner_radius
     # is set to 0 this option will be ignored.
@@ -101,7 +101,7 @@
     # border gaps ctl commandline
     # Defines width in pixels of frame around the notification window.
     # Set to 0 to disable.
-    frame_width = 4.5
+    frame_width = 4
 
     # Defines color of the frame around the notification window.
     frame_color = "#A7C080"
@@ -264,7 +264,7 @@
     # corners.
     # The radius will be automatically lowered if it exceeds half of the
     # notification height to avoid clipping text and/or icons.
-    corner_radius = 3
+    corner_radius = 10
 
     # Define which corners to round when drawing the window. If the corner radius
     # is set to 0 this option will be ignored.
@@ -287,7 +287,7 @@
     # layer = top
 
     # Set this to true to use X11 output on Wayland.
-    force_xwayland = false
+    force_xwayland = true
 
     ### Legacy
 
