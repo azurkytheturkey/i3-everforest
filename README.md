@@ -1,5 +1,8 @@
 # i3 everforest medium
 
+![image](https://github.com/user-attachments/assets/1ac6382b-a06d-4b21-abe2-7063239f166f)
+
+
 MOVE "cachysmall" to home, make sure inside the neofetch is named properly.
 
 move "alabaster" into https://github.com/alacritty/alacritty-theme /usr/lib/node_modules/alacritty-themes/themes/Alabaster.toml
@@ -27,3 +30,4 @@ block
 ```www.youtube.com###background```
 
 on ublock orgin since the youtube theme blows and i skidded the living fuck out of it
+
