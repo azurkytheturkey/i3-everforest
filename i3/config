@@ -3,22 +3,36 @@
 
 focus_follows_mouse yes
 
+#smart_borders disable
+
+mouse_warping output
+
 set $mod Mod1
+
+#border_radius 5
 
 # gaps
 
-gaps inner 40
-gaps top 40
-gaps bottom 40
+bindsym $mod+l exec i3-msg '[class=".*"] floating toggle'
+
+
+gaps inner 15
+gaps top 50
+gaps bottom 50
 #gaps vertical 0
 #gaps horizontal 0
 
+
 for_window [class="^.*"] border pixel 4
-hide_edge_borders both
+#hide_edge_borders both
 default_floating_border pixel 4
 default_border pixel 4
 
 for_window [class="Dunst"] border pixel 6
+exec_always dunst
+for_window [class="Dunst"] focus mode="always"
+
+for_window [class="Alacritty"] floating enable
 
 # everforest outline
 client.focused          #a7c080 #4f595f #D3C6AA #a7c080 #a7c080
@@ -53,21 +67,25 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec kitty
 
 # kill focused window
-bindsym $mod+q kill
+bindsym $mod+q kill; exec --no-startup-id ~/move_mouse_center1.sh
 
-# rofi 
+# rofi
 # set $execute rofi -show run
 # bindsym $mod+d exec —no-startup-is $execute
 bindsym $mod+d exec --no-startup-id ~/.config/polybar/forest/scripts/launcher.sh
 
+# explororoororo
+bindsym $mod+e exec --no-startup-id nemo
+
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+bindsym $mod+Left focus left; exec --no-startup-id ~/move_mouse_center.sh
+bindsym $mod+Right focus right; exec --no-startup-id ~/move_mouse_center.sh
+bindsym $mod+Up focus up; exec --no-startup-id ~/move_mouse_center.sh
+bindsym $mod+Down focus down; exec --no-startup-id ~/move_mouse_center.sh
+
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -76,18 +94,17 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+# bindsym $mod+h split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+# bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+# bindsym $mod+s layout stacking bindsym $mod+w layout tabbed bindsym $mod+shift+space layout toggle split
+# pussy shit fuck allat
 
 # toggle tiling / floating
 bindsym $mod+space floating toggle
@@ -97,8 +114,8 @@ bindsym $mod+space floating toggle
 # bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
-
+#bindsym $mod+a focus parent
+# never using any of this
 # focus the child container
 #bindsym $mod+d focus child
 
@@ -117,6 +134,17 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
+
+workspace $ws1 output ${env:MONITOR:}
+workspace $ws2 output HDMI-0
+workspace $ws3 output ${env:MONITOR:}
+workspace $ws4 output ${env:MONITOR:}
+workspace $ws5 output ${env:MONITOR:}
+workspace $ws6 output HDMI-0
+workspace $ws7 output ${env:MONITOR:}
+workspace $ws8 output HDMI-0
+workspace $ws9 output ${env:MONITOR:}
+workspace $ws10 output HDMI-0
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -168,12 +196,16 @@ bindsym $mod+r mode "resize"
 exec_always ./.config/polybar/forest/launch.sh
 
 # picomish
-exec_always gamemoderun picom 
+exec_always gamemoderun picom
 
-bindsym $mod+p exec gamemoderun picom || pkill picom 
+bindsym $mod+p exec gamemoderun picom || pkill picom
 
 # wallpapar for everforest
-exec_always feh --bg-fill /home/azurky/Downloads/wallpaper2.png
+exec_always nitrogen --restore
 
 # make look  nicer
 exec_always autotiling -w
+
+exec_always xrandr --output DisplayPort-2 --mode 1920x1080 --refresh 144
+exec_always xrandr --output HDMI-A-0 --mode 1920x1080 --refresh 60
+exec_always xrandr --output DisplayPort-2 --primary
