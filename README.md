@@ -33,3 +33,4 @@ block
 
 on ublock orgin since the youtube theme blows and i skidded the living fuck out of it
 
+https://github.com/jbenden/i3-gaps-rounded - i dont use real i3wm ig
